@@ -1,0 +1,18 @@
+# Student Attention Monitoring System Dependencies
+torch>=2.0.0
+torchvision
+numpy>=1.22.0
+opencv-python>=4.7.0
+mediapipe>=0.10.0
+flask>=2.2.0
+flask-cors>=3.0.10
+scikit-learn>=1.2.0
+insightface>=0.7.3
+onnxruntime>=1.14.0
+pyyaml>=6.0
+pillow>=9.4.0
+requests
+lapx
+pymysql
+cryptography
+ultralytics

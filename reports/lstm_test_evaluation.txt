@@ -1,0 +1,17 @@
+BAO CAO DANH GIA MO HINH LSTM (BEST.PT)
+Accuracy: 100.00%
+
+              precision    recall  f1-score   support
+
+   attentive     1.0000    1.0000    1.0000       320
+ using_phone     1.0000    1.0000    1.0000       151
+    sleeping     1.0000    1.0000    1.0000       100
+
+    accuracy                         1.0000       571
+   macro avg     1.0000    1.0000    1.0000       571
+weighted avg     1.0000    1.0000    1.0000       571
+
+Confusion Matrix:
+[[320   0   0]
+ [  0 151   0]
+ [  0   0 100]]

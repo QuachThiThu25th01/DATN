@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtualenv
+venv/
+ENV/
+yolov8_tracking-master/venv/
+
+# Project Specific
+dataset/
+static/captures/
+static/uploads/
+backend/web/static/captures/
+backend/web/static/uploads/
+tmp/
+thumuc/
+*.mp4
+*.avi
+*.mkv
+backup/
+scripts/logs/
+mobile/tsc_output.txt
+
+# Node modules
+node_modules/
+mobile/node_modules/
+
+# Weights / Model files
+*.pt
+yolov8_tracking-master/weights/
+
+# Jupyter
+.ipynb_checkpoints
+
+# OS
+.DS_Store
+Thumbs.db
+*.bak
+.codex_image_temp/

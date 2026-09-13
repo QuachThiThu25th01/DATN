@@ -1,0 +1,26 @@
+======================================================================
+BAO CAO KIEM CHUNG TOAN BO TAP DU LIEU (FULL DATASET EVALUATION REPORT)
+======================================================================
+
+-> Tap TRAIN: 8331/8331 mau dung (100.00%)
+-> Tap VAL: 1241/1241 mau dung (100.00%)
+-> Tap TEST: 571/571 mau dung (100.00%)
+
+[TONG THE] Tong so mau: 10143 | Do chinh xac: 100.00%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+   attentive     1.0000    1.0000    1.0000      3974
+ using_phone     1.0000    1.0000    1.0000      3462
+    sleeping     1.0000    1.0000    1.0000      2707
+
+    accuracy                         1.0000     10143
+   macro avg     1.0000    1.0000    1.0000     10143
+weighted avg     1.0000    1.0000    1.0000     10143
+
+
+Confusion Matrix:
+[[3974    0    0]
+ [   0 3462    0]
+ [   0    0 2707]]
