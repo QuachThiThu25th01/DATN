@@ -6,10 +6,10 @@ import pymysql
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
-DB_HOST = "localhost"
-DB_USER = "root"
-DB_PASSWORD = "Thubezy2004@"
-DB_NAME = "focus_db"
+DB_HOST = os.environ.get("DB_HOST", "localhost")
+DB_USER = os.environ.get("DB_USER", "root")
+DB_PASSWORD = os.environ.get("DB_PASSWORD", "")
+DB_NAME = os.environ.get("DB_NAME", "focus_db")
 
 TEST_TABLES = [
     "detection_events",

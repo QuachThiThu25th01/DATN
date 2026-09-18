@@ -125,9 +125,11 @@ def main():
     print(f"[INFO] Thiết bị tính toán: {device}")
 
     # Paths - Upgrade to YOLOv8m (Medium model - 25.9M params) cho độ chính xác vật thể nhỏ cao hơn hẳn
-    yolo_weights = PROJECT_ROOT / 'yolov8m.pt'
+    yolo_weights = PROJECT_ROOT / 'models' / 'yolov8s.pt'
     if not yolo_weights.exists():
-        yolo_weights = PROJECT_ROOT / 'models' / 'yolov8s.pt'
+        yolo_weights = PROJECT_ROOT / 'yolov8s.pt'
+    if not yolo_weights.exists():
+        yolo_weights = PROJECT_ROOT / 'yolov8m.pt'
     lstm_weights = PROJECT_ROOT / 'models' / 'lstm_multifeature' / 'best.pt'
 
     # Initialize Services

@@ -17,9 +17,9 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Cấu hình kết nối
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "Thubezy2004@",
+    "host": os.environ.get("DB_HOST", "localhost"),
+    "user": os.environ.get("DB_USER", "root"),
+    "password": os.environ.get("DB_PASSWORD", ""),
     "charset": "utf8mb4"
 }
 

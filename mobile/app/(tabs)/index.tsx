@@ -362,7 +362,7 @@ export default function DashboardScreen() {
 
       const roomRes = await apiClient.get(`/api/analytics/rooms?user_id=${user?.id}`);
       setRoomStats(roomRes.data);
-    } catch (error) {
+    } catch (error: any) {
       console.warn('Fetch dashboard error:', error?.message || error);
     }
   };
@@ -371,7 +371,7 @@ export default function DashboardScreen() {
     try {
       const response = await apiClient.get(`/api/student/portal?student_id=${user?.id}`);
       setStudentData(response.data);
-    } catch (error) {
+    } catch (error: any) {
       console.warn('Fetch student portal error:', error?.message || error);
     }
   };

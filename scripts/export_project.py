@@ -11,9 +11,9 @@ os.makedirs(SQL_DIR, exist_ok=True)
 SQL_FILE = os.path.join(SQL_DIR, "focus_db_backup.sql")
 
 # Cấu hình Database
-DB_USER = "root"
-DB_PASS = "Thubezy2004@"
-DB_NAME = "focus_db"
+DB_USER = os.environ.get("DB_USER", "root")
+DB_PASS = os.environ.get("DB_PASSWORD", "")
+DB_NAME = os.environ.get("DB_NAME", "focus_db")
 
 def export_database():
     print("=== 1. EXPORTING MYSQL DATABASE ===")

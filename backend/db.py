@@ -1,11 +1,11 @@
-# backend/db.py
+import os
 import pymysql
 from pymysql.cursors import DictCursor
 
-DB_HOST = "localhost"
-DB_USER = "root"
-DB_PASSWORD = "Thubezy2004@"
-DB_NAME = "focus_db"
+DB_HOST = os.environ.get("DB_HOST", "localhost")
+DB_USER = os.environ.get("DB_USER", "root")
+DB_PASSWORD = os.environ.get("DB_PASSWORD", "Thubezy2004@")
+DB_NAME = os.environ.get("DB_NAME", "focus_db")
 
 def get_conn():
     return pymysql.connect(

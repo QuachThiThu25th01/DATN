@@ -7,98 +7,72 @@
 
 ---
 
-## 🛠 Cấu trúc dự án (`D:\DATN`)
+## 🚀 Hướng dẫn Cài đặt & Khởi chạy (Dành cho Server `D:\DATN`)
 
-```text
-DATN/
-├── ai_service/             # Dịch vụ AI nhận diện khuôn mặt (ArcFace) & theo dõi đối tượng (YOLOv8 + ByteTrack)
-├── backend/                # Server Flask Web API (Phân tích, Quản lý Lớp, Gửi Mail Cảnh báo, Báo cáo)
-├── mobile/                 # Ứng dụng di động dành cho Sinh viên & Giảng viên (React Native / Expo)
-├── scripts/                # Kịch bản bảo trì, dọn dẹp dữ liệu, backup SQL, sơ đồ ERD
-├── SQL/                    # File khởi tạo cơ sở dữ liệu focus_db và bản sao lưu master data
-├── ANHGIAODIEN/            # Hình ảnh giao diện Web & Mobile
-├── DanhSachLopHoc/         # File Excel danh sách lớp mẫu
-├── dataset/                # Tập dữ liệu ảnh khuôn mặt mẫu của sinh viên
-├── yolov8_tracking-master/ # Thuật toán tracking YOLOv8 tích hợp
-├── FocusDB.txt             # Mô tả cấu trúc cơ sở dữ liệu
-├── FocusSystem_Colab_Runner.ipynb # Notebook chạy huấn luyện / thử nghiệm trên Google Colab
-├── requirements.txt        # Danh sách thư viện Python cần thiết
-├── run_project.ps1         # Kịch bản khởi chạy toàn bộ hệ thống tự động (Backend + Web + Mobile)
-└── setup_cuda.ps1          # Kịch bản cấu hình môi trường GPU CUDA cho AI
-```
+Dự án yêu cầu cài đặt và chạy trong thư mục `D:\DATN` để đảm bảo các đường dẫn tuyệt đối trong file cấu hình (nếu có) hoạt động chính xác.
 
----
+### 1. Yêu cầu phần cứng và phần mềm
+- **CPU**: Intel Core i5 / i7 thế hệ 10 trở lên (hoặc AMD Ryzen tương đương)
+- **RAM**: 16 GB trở lên
+- **GPU**: NVIDIA GeForce RTX 3060 (khuyến nghị VRAM ≥ 6 GB, có hỗ trợ CUDA 11.8 / 12.x)
+- **Hệ điều hành**: Windows 10 / 11 (64-bit)
+- **Phần mềm cần cài**: Python 3.10+, Node.js 18+, Git, MySQL Server 8.0+
 
-## 🔥 Các Tính Năng Chính
-
-1. **Giám sát thời gian thực (Real-time AI Monitoring):**
-   - Nhận diện khuôn mặt sinh viên chính xác bằng ArcFace.
-   - Phát hiện các vi phạm: **Dùng điện thoại**, **Ngủ gật**, **Nhìn quanh/Mất tập trung**, **Người lạ (Stranger)**.
-2. **Quản lý không gian & Lớp học:**
-   - Quản lý Không gian/Phòng máy, Lớp học phần, Cố vấn học tập, Giảng viên & Danh sách sinh viên.
-3. **Báo cáo & Thống kê tự động:**
-   - Thống kê biểu đồ di chuyển của Điểm tập trung trung bình.
-   - Xuất báo cáo điểm danh & vi phạm ra file Excel (`.xlsx`).
-   - Gửi Email cảnh báo tự động đến sinh viên vi phạm nhiều lần.
-4. **Ứng dụng Di động (Mobile App):**
-   - Đăng nhập theo vai trò (Sinh viên / Giảng viên / Quản trị viên).
-   - Xem điểm tập trung cá nhân, lịch sử vi phạm, thông báo và lịch học.
-5. **Sơ đồ Cơ sở Dữ liệu (ERD):**
-   - Chuẩn hóa 14 bảng dữ liệu relational đầy đủ chi tiết khóa ngoại.
-
----
-
-## 🚀 Hướng dẫn Khởi chạy Hệ thống
-
-### 1. Yêu cầu môi trường
-- **Python**: 3.10+ (Khuyến nghị 3.10.x)
-- **Node.js**: 18+ (Dành cho ứng dụng Mobile Expo)
-- **MySQL Server**: 8.0+ (Cơ sở dữ liệu `focus_db`)
-
-### 2. Cài đặt thư viện Python & Mobile
+### 2. Tải Source Code từ GitHub
+Mở Command Prompt hoặc PowerShell, di chuyển đến ổ đĩa `D:\` và thực hiện lệnh clone:
 ```powershell
-# Cài đặt thư viện Backend & AI
-pip install -r requirements.txt
-
-# Cài đặt thư viện Mobile (nếu cần chạy Expo)
-cd mobile
-npm install
+d:
+git clone https://github.com/QuachThiThu25th01/DATN.git
+cd DATN
 ```
 
-### 3. Khởi chạy dự án bằng PowerShell
-Hệ thống cung cấp file script tự động hóa `run_project.ps1`:
+### 3. Cài đặt và cấu hình Cơ sở dữ liệu MySQL (`focus_db`)
+1. Đăng nhập MySQL bằng tài khoản root:
+   ```sql
+   mysql -u root -p
+   CREATE DATABASE focus_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   EXIT;
+   ```
+2. Nạp dữ liệu khởi tạo 14 bảng quan hệ và dữ liệu danh mục mẫu từ file `SQL/focus_db_backup.sql`:
+   ```bash
+   mysql -u root -p focus_db < SQL/focus_db_backup.sql
+   ```
+3. Kiểm tra thông tin kết nối CSDL trong file `backend/db.py` (Mặc định dùng User: `root`, Password rỗng `""` và DB `focus_db`).
+
+### 4. Thiết lập địa chỉ IP mạng LAN cho Mobile App
+Để Mobile App kết nối được tới Backend Server, cần xác định địa chỉ IPv4 của máy tính đang chạy Backend:
+1. Mở PowerShell và chạy lệnh `ipconfig` để lấy địa chỉ IPv4 (ví dụ: `192.168.1.15`).
+2. Mở file `mobile/constants/api.ts` và thay đổi hằng số `DEFAULT_LAN_IP` thành địa chỉ IPv4 vừa lấy được:
+   ```typescript
+   export const DEFAULT_LAN_IP = '192.168.1.15'; // Thay bằng IP của máy tính
+   ```
+
+### 5. Khởi chạy toàn bộ hệ thống
+Hệ thống cung cấp sẵn kịch bản tự động hóa `run_project.ps1` để tự động kích hoạt môi trường ảo, cài đặt thư viện phụ thuộc và khởi chạy cả Backend lẫn Mobile App:
 ```powershell
 .\run_project.ps1
 ```
-Script sẽ tự động:
-- Kiểm tra kết nối Cơ sở dữ liệu MySQL `focus_db`.
-- Khởi chạy Flask Server tại `http://localhost:5000`.
-- Khởi chạy Expo Metro Server cho ứng dụng Mobile.
+*Lưu ý: Nếu chạy lần đầu, quá trình cài đặt thư viện (`pip install` và `npm install`) sẽ mất một chút thời gian. Sau khi xong, hệ thống sẽ mở Server backend và Metro bundler cho Mobile.*
+
+Hoặc bạn có thể chạy thủ công từng phần theo hướng dẫn trong thư mục `backend` và `mobile`.
+
+Sau khi khởi động thành công:
+- **Web Dashboard (Backend)** chạy tại: `http://localhost:5000`
+- **Mobile App (Expo)**: Quét mã QR hiển thị ở terminal bằng ứng dụng **Expo Go** trên điện thoại (đảm bảo điện thoại dùng chung mạng Wi-Fi với máy tính).
 
 ---
 
-## 📝 Hướng dẫn Push dự án lên GitHub
+## 🔑 Tài khoản Đăng nhập Hệ thống (Test Accounts)
 
-```bash
-# 1. Di chuyển vào thư mục D:\DATN
-cd D:\DATN
+Dưới đây là các tài khoản mặc định đã được tạo sẵn trong CSDL (`SQL/focus_db_backup.sql`) để trải nghiệm đầy đủ các phân hệ chức năng (Web & Mobile):
 
-# 2. Khởi tạo Git repository
-git init
-
-# 3. Thêm tất cả file vào Git
-git add .
-
-# 4. Tạo commit đầu tiên
-git commit -m "Initial commit: Complete FocusSystem Project Clean Source"
-
-# 5. Liên kết với Repository trên GitHub của bạn
-git remote add origin <URL_GITHUB_REPO_CUA_BAN>
-
-# 6. Push mã nguồn lên GitHub
-git branch -M main
-git push -u origin main
-```
+| Vai trò | Tên đăng nhập | Mật khẩu | Ghi chú |
+| :--- | :--- | :--- | :--- |
+| **Quản trị viên (Admin)** | `admin` | `admin` | Toàn quyền quản lý danh mục, tài khoản, giám sát AI |
+| **Giảng viên giảng dạy** | `gvgd01` | `GVGD01` | Theo dõi Camera AI, xem danh sách sinh viên vi phạm trong ca |
+| **Cố vấn học tập** | `gvcn25th01` | `GVCN25TH01` | Xem thống kê lớp sinh hoạt, gửi email cảnh báo học vụ |
+| **Sinh viên (Thu)** | `22050034` | `22050034` | Quách Thị Thu - Xem điểm tập trung, nhận thông báo đẩy (Push) |
+| **Sinh viên (Minh)** | `22050076` | `22050076` | Hà Văn Minh - Xem lịch sử vi phạm cá nhân trên Mobile App |
 
 ---
 *Dự án Đồ án Tốt nghiệp - Hệ thống Giám sát & Phân tích Động thái Học tập Sinh viên (FocusSystem)*

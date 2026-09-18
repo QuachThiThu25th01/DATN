@@ -11,8 +11,16 @@ import cv2
 import numpy as np
 try:
     import mediapipe as mp
+    try:
+        mp_solutions = mp.solutions
+    except AttributeError:
+        try:
+            import mediapipe.python.solutions as mp_solutions
+        except Exception:
+            mp_solutions = None
 except ImportError:
     mp = None
+    mp_solutions = None
 
 from ai_service.features.head_pose import compute_3d_head_pose
 
@@ -24,7 +32,7 @@ class EyeFeatureExtractor:
 
     def __init__(self):
         self.input_size = max(192, int(os.environ.get("FOCUS_FACE_MESH_SIZE", "256")))
-        self.mesh = None if mp is None else mp.solutions.face_mesh.FaceMesh(
+        self.mesh = None if mp_solutions is None else mp_solutions.face_mesh.FaceMesh(
             static_image_mode=True, max_num_faces=1, refine_landmarks=True,
             min_detection_confidence=0.05, min_tracking_confidence=0.05
         )

@@ -15,7 +15,9 @@ from backend.db import get_conn as get_connection
 
 # Import 100% Modular AI Engines từ ai_service
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-WEIGHTS_PATH = Path(os.environ.get('FOCUS_YOLO_WEIGHTS', PROJECT_ROOT / 'yolov8s.pt'))
+WEIGHTS_PATH = Path(os.environ.get('FOCUS_YOLO_WEIGHTS', PROJECT_ROOT / 'models' / 'yolov8s.pt'))
+if not WEIGHTS_PATH.exists():
+    WEIGHTS_PATH = PROJECT_ROOT / 'yolov8s.pt'
 if not WEIGHTS_PATH.exists():
     WEIGHTS_PATH = PROJECT_ROOT / 'yolov8m.pt'
 

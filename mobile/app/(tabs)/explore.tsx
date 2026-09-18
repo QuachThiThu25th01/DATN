@@ -334,6 +334,7 @@ export default function HistoryScreen() {
                                     data={chartData}
                                     width={Math.max(width - 60, (detailData?.chart?.length || 0) * 55)}
                                     height={240}
+                                    xLabelsOffset={-4}
                                     chartConfig={{
                                         backgroundColor: themeCardBg,
                                         backgroundGradientFrom: themeCardBg,
@@ -346,7 +347,6 @@ export default function HistoryScreen() {
                                         fillShadowGradientOpacity: 0.15,
                                         paddingRight: 35,
                                         paddingTop: 10,
-                                        xLabelsOffset: -4,
                                     }}
                                     bezier
                                     style={{ marginVertical: 8, borderRadius: 16 }}
